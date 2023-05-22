@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 const App = () => {
 	const initialData = {
 		score: 0,
-		BastScore: 0,
+		BestScore: 0,
 	};
 
 	const [state, setState] = useState(initialData);
@@ -18,17 +18,18 @@ const App = () => {
 			score: state.score + 1,
 		});
 
-	const onReSetScore = () =>
+	const onResetScore = () => {
 		setState({
 			score: 0,
-			BastScore:
-				state.BastScore < state.score ? state.score : state.BastScore,
+			BestScore:
+				state.BestScore < state.score ? state.score : state.BestScore,
 		});
+	};
 
 	return (
 		<>
 			<Header state={state} />
-			<Content onAddScore={onAddScore} reSetScore={onReSetScore} />
+			<Content onAddScore={onAddScore} onResetScore={onResetScore} />
 			<Footer />
 		</>
 	);
