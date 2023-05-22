@@ -23,6 +23,13 @@ const App = () => {
 				state.BastScore < state.score ? state.score : state.BastScore,
 		});
 
+	return (
+		<>
+			<Header state={state} />
+			<Content onAddScore={onAddScore} reSetScore={onReSetScore} />
+			<Footer />
+		</>
+	);
 };
 
 export default App;
