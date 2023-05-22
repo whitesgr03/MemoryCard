@@ -2,19 +2,14 @@
 	flex: 1 1 auto;
 	display: flex;
 	justify-content: center;
-	align-items: flex-end;
-	column-gap: 15px;
+	align-items: center;
+	column-gap: 20px;
 	color: var(--main-dark);
-	z-index: 1;
 	background-color: var(--header-bgc);
 }
 
-.footer a {
-	display: inline-flex;
-	vertical-align: bottom;
-}
-
-.footer img {
+.footer svg {
 	width: 20px;
-	height: auto;
+	margin-left: 5px;
+	vertical-align: bottom;
 }
