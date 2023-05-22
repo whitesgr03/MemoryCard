@@ -8,10 +8,4 @@ const Header = ({ state }) => (
 	</div>
 );
 
-// const Navbar = () => (
-// 	<>
-
-// 	</>
-// );
-
 export default Header;
