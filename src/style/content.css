@@ -1,0 +1,48 @@
+.content {
+	overflow: scroll;
+	flex: 1 1 100%;
+	background-color: var(--content-bgc);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.content ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 20px;
+	width: 80%;
+	margin: auto;
+}
+
+.content button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 200px;
+	height: 200px;
+	background-color: #544f54;
+	border: 5px solid var(--main-dark);
+	border-radius: 15px;
+	transition: transform 0.1s ease;
+}
+.content button:active {
+	transform: scale(0.95);
+}
+
+.content img {
+	display: block;
+	height: 100%;
+	width: 80%;
+	overflow: hidden;
+}
+
+.content p {
+	width: 100%;
+	text-align: center;
+	border-top: 3px solid var(--main-dark);
+	padding: 5px 0;
+}
