@@ -10,6 +10,19 @@ const App = () => {
 
 	const [state, setState] = useState(initialData);
 
+	const onAddScore = () =>
+		setState({
+			...state,
+			score: state.score + 1,
+		});
+
+	const onReSetScore = () =>
+		setState({
+			score: 0,
+			BastScore:
+				state.BastScore < state.score ? state.score : state.BastScore,
+		});
+
 };
 
 export default App;
