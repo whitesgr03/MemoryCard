@@ -31,6 +31,7 @@ const App = () => {
 		<>
 			<Header state={state} />
 			<Content
+				state={state}
 				handleResetGame={handleResetGame}
 				handleSetBestScore={handleSetBestScore}
 				handleAddScore={handleAddScore}
