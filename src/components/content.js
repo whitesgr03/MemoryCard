@@ -1,34 +1,29 @@
 import { useState } from "react";
 
-const Content = ({ onAddScore, onResetScore }) => {
+const Content = ({ handleAddScore, handleResetScore }) => {
 	const images = require.context("../image/zodiac", false, /.jpg$/);
 
-	const initialData = {
-		listItems: images.keys().map(key => ({
-			name: key.match(/(?<=\.\/)[^.]+/g)[0],
-			url: images(key),
-		})),
-		clickedSign: [],
+	const listItems = images.keys().map(key => ({
+		name: key.match(/(?<=\.\/)[^.]+/g)[0],
+		url: images(key),
+	}));
+
+	const [clickedSigns, setClickedSigns] = useState([]);
+
+	const onCheckClickedSigns = sign => {
+		clickedSigns.find(item => item === sign)
+			? onResetScore()
+			: onAddScore(sign);
 	};
 
-	const [listItems, setListItems] = useState(initialData.listItems);
-	const [clickedSign, setClickedSign] = useState(initialData.clickedSign);
-
-	const handleClick = sign => {
-		clickedSign.find(item => item === sign)
-			? handleResetScore()
-			: handleAddScore(sign);
-		setListItems(shuffle(listItems));
+	const onAddScore = sign => {
+		handleAddScore();
+		setClickedSigns([...clickedSigns, sign]);
 	};
 
-	const handleAddScore = sign => {
-		onAddScore();
-		setClickedSign([...clickedSign, sign]);
-	};
-
-	const handleResetScore = () => {
-		onResetScore();
-		setClickedSign(initialData.clickedSign);
+	const onResetScore = () => {
+		handleResetScore();
+		setClickedSigns(clickedSigns);
 	};
 
 	const shuffle = array => {
@@ -42,10 +37,13 @@ const Content = ({ onAddScore, onResetScore }) => {
 		return newArray;
 	};
 
-	const List = listItems.map(item => {
+	const List = shuffle(listItems).map(item => {
 		return (
 			<li key={item.name}>
-				<button type="button" onClick={() => handleClick(item.name)}>
+				<button
+					type="button"
+					onClick={() => onCheckClickedSigns(item.name)}
+				>
 					<img src={item.url} alt={item.name} />
 					<p>{item.name}</p>
 				</button>
