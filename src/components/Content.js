@@ -65,7 +65,28 @@ const Content = ({
 	});
 
 	return (
-		<div className="content">
+		<div
+			className={`content ${
+				isGameOver || state.BestScore === 12 ? "blur" : ""
+			}`}
+		>
+			<div className="wrap">
+				<div className="menu">
+					<h4>
+						{state.BestScore === 12
+							? "You win the Game!"
+							: "You click on the same card twice!"}
+					</h4>
+					<button
+						type="button"
+						className={activeId ? "press" : ""}
+						onAnimationEnd={onResetGame}
+						onClick={() => setActiveId(true)}
+					>
+						Play Again
+					</button>
+				</div>
+			</div>
 			<ul>{List}</ul>
 		</div>
 	);
