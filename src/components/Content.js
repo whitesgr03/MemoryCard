@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+const Content = ({
+	state,
+	handleAddScore,
+	handleSetBestScore,
+	handleResetGame,
+}) => {
 	const imagesData = require.context("../image/zodiac", false, /.jpg$/);
 
 	const images = imagesData.keys().map((key, i) => ({
@@ -25,8 +31,12 @@ import { useState } from "react";
 	};
 
 	const onResetScore = () => {
-		handleResetScore();
-		setClickedSigns(clickedSigns);
+	const onResetGame = () => {
+		handleResetGame();
+		setGameOver(false);
+		setActiveId(false);
+		setClickedSigns([]);
+		setItems(images);
 	};
 
 	const shuffle = array => {
