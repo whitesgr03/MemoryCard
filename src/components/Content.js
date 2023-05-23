@@ -9,6 +9,7 @@ import { useState } from "react";
 	}));
 
 	const [isGameOver, setGameOver] = useState(false);
+	const [activeId, setActiveId] = useState(null);
 	const [clickedSigns, setClickedSigns] = useState([]);
 	const [items, setItems] = useState(images);
 
