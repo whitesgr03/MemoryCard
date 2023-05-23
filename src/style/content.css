@@ -30,10 +30,6 @@
 	background-color: #544f54;
 	border: 5px solid var(--main-dark);
 	border-radius: 15px;
-	transition: transform 0.1s ease;
-}
-.content button:active {
-	transform: scale(0.95);
 }
 
 .content img {
