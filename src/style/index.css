@@ -12,6 +12,7 @@
 	--main-light: #fff;
 	--header-bgc: #c39c93;
 	--header-text: #6393dc;
+	--shadow-color: rgba(0, 0, 0, 0.4);
 }
 
 * {
