@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const Content = ({
 	state,
@@ -18,6 +18,16 @@ const Content = ({
 	const [activeId, setActiveId] = useState(null);
 	const [clickedSigns, setClickedSigns] = useState([]);
 	const [items, setItems] = useState(images);
+	const [height, setHeight] = useState(null);
+
+	const ref = useRef(null);
+
+	useEffect(() => {
+		window.addEventListener("resize", onChangeHeight);
+		return () => {
+			window.removeEventListener("resize", onChangeHeight);
+		};
+	}, []);
 
 	const onCheckClickedSigns = sign => {
 		setActiveId(null);
@@ -56,6 +66,8 @@ const Content = ({
 		return newArray;
 	};
 
+	const onChangeHeight = () => setHeight(ref.current.scrollHeight);
+
 	const List = items.map(item => {
 		return (
 			<li className="list" key={item.id}>
@@ -75,15 +87,16 @@ const Content = ({
 	return (
 		<div
 			className={`content ${
-				isGameOver || state.BestScore === 12 ? "blur" : ""
+				isGameOver || state.score === 12 ? "blur" : ""
 			}`}
 		>
-			<div className="wrap">
+			<div>
+				<div className="wrap" style={{ height: height }}></div>
 				<div className="menu">
 					<h4>
-						{state.BestScore === 12
+						{state.score === 12
 							? "You win the Game!"
-							: "You click on the same card twice!"}
+							: "You cannot tap twice on the same card!"}
 					</h4>
 					<button
 						type="button"
@@ -91,11 +104,11 @@ const Content = ({
 						onAnimationEnd={onResetGame}
 						onClick={() => setActiveId(true)}
 					>
-						Play Again
+						{state.score === 12 ? "Play Again" : "Try Again"}
 					</button>
 				</div>
+				<ul ref={ref}>{List}</ul>
 			</div>
-			<ul>{List}</ul>
 		</div>
 	);
 };
