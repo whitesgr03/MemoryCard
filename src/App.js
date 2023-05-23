@@ -12,24 +12,26 @@ const App = () => {
 
 	const [state, setState] = useState(initialData);
 
-	const onAddScore = () =>
+	const handleAddScore = () =>
 		setState({
 			...state,
 			score: state.score + 1,
 		});
 
-	const onResetScore = () => {
+	const handleResetScore = () =>
 		setState({
 			score: 0,
 			BestScore:
 				state.BestScore < state.score ? state.score : state.BestScore,
 		});
-	};
 
 	return (
 		<>
 			<Header state={state} />
-			<Content onAddScore={onAddScore} onResetScore={onResetScore} />
+			<Content
+				handleResetScore={handleResetScore}
+				handleAddScore={handleAddScore}
+			/>
 			<Footer />
 		</>
 	);
