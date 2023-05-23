@@ -8,6 +8,7 @@ import { useState } from "react";
 		url: imagesData(key),
 	}));
 
+	const [isGameOver, setGameOver] = useState(false);
 	const [clickedSigns, setClickedSigns] = useState([]);
 	const [items, setItems] = useState(images);
 
