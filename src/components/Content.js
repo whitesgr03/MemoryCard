@@ -20,9 +20,11 @@ const Content = ({
 	const [items, setItems] = useState(images);
 
 	const onCheckClickedSigns = sign => {
+		setActiveId(null);
 		clickedSigns.find(item => item === sign)
 			? onResetScore()
 			: onAddScore(sign);
+		setItems(shuffle(items));
 	};
 
 	const onAddScore = sign => {
@@ -31,6 +33,10 @@ const Content = ({
 	};
 
 	const onResetScore = () => {
+		handleSetBestScore();
+		setGameOver(true);
+	};
+
 	const onResetGame = () => {
 		handleResetGame();
 		setGameOver(false);
@@ -52,10 +58,12 @@ const Content = ({
 
 	const List = items.map(item => {
 		return (
-			<li key={item.name}>
+			<li className="list" key={item.id}>
 				<button
 					type="button"
-					onClick={() => onCheckClickedSigns(item.name)}
+					className={activeId === item.id ? "press" : ""}
+					onAnimationEnd={() => onCheckClickedSigns(item.name)}
+					onClick={() => setActiveId(item.id)}
 				>
 					<img src={item.url} alt={item.name} />
 					<p>{item.name}</p>
