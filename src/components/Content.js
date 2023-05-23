@@ -24,6 +24,7 @@ const Content = ({
 
 	useEffect(() => {
 		window.addEventListener("resize", onChangeHeight);
+
 		return () => {
 			window.removeEventListener("resize", onChangeHeight);
 		};
@@ -32,7 +33,7 @@ const Content = ({
 	const onCheckClickedSigns = sign => {
 		setActiveId(null);
 		clickedSigns.find(item => item === sign)
-			? onResetScore()
+			? setGameOver(true)
 			: onAddScore(sign);
 		setItems(shuffle(items));
 	};
@@ -44,11 +45,15 @@ const Content = ({
 
 	const onResetScore = () => {
 		handleSetBestScore();
-		setGameOver(true);
+		onReset();
 	};
 
 	const onResetGame = () => {
 		handleResetGame();
+		onReset();
+	};
+
+	const onReset = () => {
 		setGameOver(false);
 		setActiveId(false);
 		setClickedSigns([]);
@@ -89,23 +94,36 @@ const Content = ({
 			className={`content ${
 				isGameOver || state.score === 12 ? "blur" : ""
 			}`}
+			onScroll={onChangeHeight}
 		>
 			<div>
 				<div className="wrap" style={{ height: height }}></div>
 				<div className="menu">
-					<h4>
-						{state.score === 12
-							? "You win the Game!"
-							: "You cannot tap twice on the same card!"}
-					</h4>
-					<button
-						type="button"
-						className={activeId ? "press" : ""}
-						onAnimationEnd={onResetGame}
-						onClick={() => setActiveId(true)}
-					>
-						{state.score === 12 ? "Play Again" : "Try Again"}
-					</button>
+					{state.score === 12 ? (
+						<>
+							<h4>You win the Game!</h4>
+							<button
+								type="button"
+								className={activeId ? "press" : ""}
+								onAnimationEnd={onResetGame}
+								onClick={() => setActiveId(true)}
+							>
+								Play Again
+							</button>
+						</>
+					) : (
+						<>
+							<h4>You cannot tap twice on the same card!</h4>
+							<button
+								type="button"
+								className={activeId ? "press" : ""}
+								onAnimationEnd={onResetScore}
+								onClick={() => setActiveId(true)}
+							>
+								Try Again
+							</button>
+						</>
+					)}
 				</div>
 				<ul ref={ref}>{List}</ul>
 			</div>
