@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-const Content = ({ handleAddScore, handleResetScore }) => {
-	const images = require.context("../image/zodiac", false, /.jpg$/);
+	const imagesData = require.context("../image/zodiac", false, /.jpg$/);
 
-	const listItems = images.keys().map(key => ({
+	const images = imagesData.keys().map((key, i) => ({
+		id: i,
 		name: key.match(/(?<=\.\/)[^.]+/g)[0],
-		url: images(key),
+		url: imagesData(key),
 	}));
 
 	const [clickedSigns, setClickedSigns] = useState([]);
