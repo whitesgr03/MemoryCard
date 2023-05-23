@@ -18,7 +18,7 @@ const App = () => {
 			score: state.score + 1,
 		});
 
-	const handleResetScore = () =>
+	const handleSetBestScore = () =>
 		setState({
 			score: 0,
 			BestScore:
@@ -32,6 +32,7 @@ const App = () => {
 			<Header state={state} />
 			<Content
 				handleResetGame={handleResetGame}
+				handleSetBestScore={handleSetBestScore}
 				handleAddScore={handleAddScore}
 			/>
 			<Footer />
