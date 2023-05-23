@@ -9,6 +9,7 @@ import { useState } from "react";
 	}));
 
 	const [clickedSigns, setClickedSigns] = useState([]);
+	const [items, setItems] = useState(images);
 
 	const onCheckClickedSigns = sign => {
 		clickedSigns.find(item => item === sign)
@@ -37,7 +38,7 @@ import { useState } from "react";
 		return newArray;
 	};
 
-	const List = shuffle(listItems).map(item => {
+	const List = items.map(item => {
 		return (
 			<li key={item.name}>
 				<button
