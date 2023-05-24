@@ -8,6 +8,11 @@
 	background-color: var(--header-bgc);
 }
 
+.footer .attribution {
+	font-size: 1px;
+	font-weight: lighter;
+}
+
 .footer svg {
 	width: 20px;
 	margin-left: 5px;

@@ -10,6 +10,7 @@ const Footer = () => {
 				<Icon path={mdiGithub} alt="Github Icon" />
 			</a>
 			<a
+				className="attribution"
 				href="https://www.flaticon.com/free-icons/astrology"
 				title="astrology icons"
 			>
