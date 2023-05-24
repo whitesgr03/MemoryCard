@@ -47,6 +47,7 @@ const App = () => {
 				onActiveAnimation={setActive}
 			/>
 
+			<Header state={state} onShowInfo={setShowInfo} />
 			<Content
 				state={state}
 				handleResetGame={handleResetGame}
