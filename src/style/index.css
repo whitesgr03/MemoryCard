@@ -37,6 +37,7 @@ h2,
 h3,
 h4 {
 	margin: 0;
+	white-space: pre-line;
 }
 
 button {
@@ -62,7 +63,91 @@ body {
 
 #root {
 	height: 100%;
+}
+
+.app {
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	position: relative;
+}
+
+.app.blur .content {
+	overflow: hidden;
+}
+
+.app.blur > .wrap {
+	backdrop-filter: blur(7px);
+	background-color: var(--shadow-color);
+	opacity: 1;
+	visibility: visible;
+	z-index: 1;
+}
+
+.app .info {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 80%;
+	transform: translate(-50%, -50%);
+	font-size: 1.2rem;
+	border: 4px solid var(--main-dark);
+	display: none;
+	flex-direction: column;
+
+	justify-content: center;
+	border-radius: 20px;
+	padding: 20px 50px;
+	background-color: var(--header-bgc);
+	row-gap: 20px;
+	box-shadow: 8px 8px 0px 0px var(--main-dark);
+	white-space: pre;
+}
+
+.app .info h2 {
+	text-align: center;
+}
+
+.app .info li {
+	margin: 0;
+	list-style-type: decimal;
+}
+
+.app.blur .info {
+	display: flex;
+	z-index: 1;
+}
+
+.info button {
+	margin: 0 auto;
+	width: 50%;
+	border: 4px solid var(--main-dark);
+	background-color: var(--main-dark);
+	border-radius: 40px;
+	padding: 5px 15px;
+	color: var(--main-light);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.info button:hover {
+	color: var(--main-dark);
+	background-color: var(--header-text);
+}
+
+.info button.press {
+	animation: press 0.2s linear;
+}
+
+@keyframes press {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(0.9);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
