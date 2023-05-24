@@ -111,6 +111,8 @@ body {
 
 .app .info li {
 	margin: 0;
+
+	list-style-position: inside;
 	list-style-type: decimal;
 }
 
