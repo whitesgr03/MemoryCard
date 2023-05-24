@@ -6,3 +6,25 @@
 	background-color: var(--header-bgc);
 	padding: 20px 30px;
 }
+
+.header .scoreBoard {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	column-gap: 20px;
+}
+
+.header svg {
+	width: 2rem;
+}
+
+.header button {
+	transition: all 0.3s ease, transform 0.1s ease;
+}
+.header button:hover {
+	color: var(--main-light);
+}
+
+.header button:active {
+	transform: scale(0.9);
+}
