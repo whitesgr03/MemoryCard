@@ -9,6 +9,12 @@ const Footer = () => {
 				Weiss Bai
 				<Icon path={mdiGithub} alt="Github Icon" />
 			</a>
+			<a
+				href="https://www.flaticon.com/free-icons/astrology"
+				title="astrology icons"
+			>
+				Astrology icons created by Freepik - Flaticon
+			</a>
 		</div>
 	);
 };
