@@ -98,35 +98,35 @@ const Content = ({
 		>
 			<div>
 				<div className="wrap" style={{ height: height }}></div>
-				<div className="menu">
-					{state.score === 12 ? (
-						<>
-							<h4>You win the Game!</h4>
-							<button
-								type="button"
-								className={activeId ? "press" : ""}
-								onAnimationEnd={onResetGame}
-								onClick={() => setActiveId(true)}
-							>
-								Play Again
-							</button>
-						</>
-					) : (
-						<>
-							<h4>You cannot tap twice on the same card!</h4>
-							<button
-								type="button"
-								className={activeId ? "press" : ""}
-								onAnimationEnd={onResetScore}
-								onClick={() => setActiveId(true)}
-							>
-								Try Again
-							</button>
-						</>
-					)}
-				</div>
+				<Menu
+					state={state}
+					activeId={activeId}
+					onResetGame={onResetGame}
+					onResetScore={onResetScore}
+					setActiveId={setActiveId}
+				/>
 				<ul ref={ref}>{List}</ul>
 			</div>
+		</div>
+	);
+};
+
+const Menu = ({ state, activeId, onResetGame, onResetScore, setActiveId }) => {
+	return (
+		<div className="menu">
+			<h4>
+				{state.score === 12
+					? " You win the Game!"
+					: "You cannot click twice on the same card!"}
+			</h4>
+			<button
+				type="button"
+				className={activeId ? "press" : ""}
+				onAnimationEnd={state.score === 12 ? onResetGame : onResetScore}
+				onClick={() => setActiveId(true)}
+			>
+				{state.score === 12 ? "Play Again" : "Try Again"}
+			</button>
 		</div>
 	);
 };
