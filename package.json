@@ -2,7 +2,7 @@
 	"name": "memory-card",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://github.com/whitesgr03/MemoryCard/",
+	"homepage": "https://whitesgr03.github.io/MemoryCard/",
 	"dependencies": {
 		"@mdi/js": "^7.2.96",
 		"@mdi/react": "^1.6.1",
