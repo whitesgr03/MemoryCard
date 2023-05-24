@@ -69,6 +69,7 @@
 	height: 100%;
 	opacity: 0;
 	visibility: hidden;
+	z-index: 1;
 	transition: all 0.3s ease;
 }
 
@@ -105,7 +106,8 @@
 	background-color: var(--header-bgc);
 	row-gap: 20px;
 	box-shadow: 8px 8px 0px 0px var(--main-dark);
-	white-space: pre;
+
+	z-index: 1;
 }
 
 .content .menu button {
@@ -115,6 +117,7 @@
 	padding: 5px 15px;
 	color: var(--main-light);
 	cursor: pointer;
+
 	transition: all 0.3s ease;
 }
 
