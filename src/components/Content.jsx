@@ -1,11 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-const Content = ({
-	state,
-	handleAddScore,
-	handleSetBestScore,
-	handleResetGame,
-}) => {
+const Content = ({ state, onAddScore, onSetBestScore, onResetGame }) => {
 	const imagesData = require.context("../image/zodiac", false, /.jpg$/);
 
 	const images = imagesData.keys().map((key, i) => ({
@@ -23,37 +18,14 @@ const Content = ({
 	const ref = useRef(null);
 
 	useEffect(() => {
-		window.addEventListener("resize", onChangeHeight);
+		window.addEventListener("resize", handleChangeHeight);
 
 		return () => {
-			window.removeEventListener("resize", onChangeHeight);
+			window.removeEventListener("resize", handleChangeHeight);
 		};
 	}, []);
 
-	const onCheckClickedSigns = sign => {
-		setActiveId(null);
-		clickedSigns.find(item => item === sign)
-			? setGameOver(true)
-			: onAddScore(sign);
-		setItems(shuffle(items));
-	};
-
-	const onAddScore = sign => {
-		handleAddScore();
-		setClickedSigns([...clickedSigns, sign]);
-	};
-
-	const onResetScore = () => {
-		handleSetBestScore();
-		onReset();
-	};
-
-	const onResetGame = () => {
-		handleResetGame();
-		onReset();
-	};
-
-	const onReset = () => {
+	const handleReset = () => {
 		setGameOver(false);
 		setActiveId(false);
 		setClickedSigns([]);
@@ -71,7 +43,32 @@ const Content = ({
 		return newArray;
 	};
 
-	const onChangeHeight = () => setHeight(ref.current.scrollHeight);
+	const handleChangeHeight = () => setHeight(ref.current.scrollHeight);
+
+	const handleCheckClickedSigns = sign => {
+		setActiveId(null);
+		clickedSigns.find(item => item === sign)
+			? setGameOver(true)
+			: handleAddScore(sign);
+		setItems(shuffle(items));
+	};
+
+	const handleAddScore = sign => {
+		onAddScore();
+		setClickedSigns([...clickedSigns, sign]);
+	};
+
+	const handleResetScore = () => {
+		onSetBestScore();
+		handleReset();
+		console.log("123");
+	};
+
+	const handleResetGame = () => {
+		onResetGame();
+		handleReset();
+		console.log("123");
+	};
 
 	const List = items.map(item => {
 		return (
@@ -79,7 +76,7 @@ const Content = ({
 				<button
 					type="button"
 					className={activeId === item.id ? "press" : ""}
-					onAnimationEnd={() => onCheckClickedSigns(item.name)}
+					onAnimationEnd={() => handleCheckClickedSigns(item.name)}
 					onClick={() => setActiveId(item.id)}
 				>
 					<img src={item.url} alt={item.name} />
@@ -94,15 +91,15 @@ const Content = ({
 			className={`content ${
 				isGameOver || state.score === 12 ? "blur" : ""
 			}`}
-			onScroll={onChangeHeight}
+			onScroll={handleChangeHeight}
 		>
 			<div>
 				<div className="wrap" style={{ height: height }}></div>
 				<Menu
 					state={state}
 					activeId={activeId}
-					onResetGame={onResetGame}
-					onResetScore={onResetScore}
+					handleResetGame={handleResetGame}
+					handleResetScore={handleResetScore}
 					setActiveId={setActiveId}
 				/>
 				<ul ref={ref}>{List}</ul>
@@ -111,7 +108,13 @@ const Content = ({
 	);
 };
 
-const Menu = ({ state, activeId, onResetGame, onResetScore, setActiveId }) => {
+const Menu = ({
+	state,
+	activeId,
+	handleResetGame,
+	handleResetScore,
+	setActiveId,
+}) => {
 	return (
 		<div className="menu">
 			<h4>
@@ -122,8 +125,12 @@ const Menu = ({ state, activeId, onResetGame, onResetScore, setActiveId }) => {
 			<button
 				type="button"
 				className={activeId ? "press" : ""}
-				onAnimationEnd={state.score === 12 ? onResetGame : onResetScore}
-				onClick={() => setActiveId(true)}
+				onAnimationEnd={
+					state.score === 12 ? handleResetGame : handleResetScore
+				}
+				onClick={() => {
+					setActiveId(true);
+				}}
 			>
 				{state.score === 12 ? "Play Again" : "Try Again"}
 			</button>

@@ -43,23 +43,23 @@ const App = () => {
 			<div className="wrap"></div>
 			<Info
 				activeAnimation={isActive}
-				handleHideInfo={handleHideInfo}
+				onHideInfo={handleHideInfo}
 				onActiveAnimation={setActive}
 			/>
 
 			<Header state={state} onShowInfo={setShowInfo} />
 			<Content
 				state={state}
-				handleResetGame={handleResetGame}
-				handleSetBestScore={handleSetBestScore}
-				handleAddScore={handleAddScore}
+				onResetGame={handleResetGame}
+				onSetBestScore={handleSetBestScore}
+				onAddScore={handleAddScore}
 			/>
 			<Footer />
 		</div>
 	);
 };
 
-const Info = ({ activeAnimation, handleHideInfo, onActiveAnimation }) => (
+const Info = ({ activeAnimation, onHideInfo, onActiveAnimation }) => (
 	<div className="info">
 		<h2>Zodiac Memory</h2>
 		<h3>How to Play</h3>
@@ -76,7 +76,7 @@ const Info = ({ activeAnimation, handleHideInfo, onActiveAnimation }) => (
 		<button
 			type="button"
 			className={activeAnimation ? "press" : ""}
-			onAnimationEnd={handleHideInfo}
+			onAnimationEnd={onHideInfo}
 			onClick={() => onActiveAnimation(true)}
 		>
 			Let's Play
